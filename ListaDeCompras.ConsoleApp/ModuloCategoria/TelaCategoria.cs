@@ -1,10 +1,11 @@
 using System;
+using System.Collections;
 using ListaDeCompras.ConsoleApp.Compartilhado;
 
 namespace ListaDeCompras.ConsoleApp.ModuloCategoria;
 
 public class TelaCategoria : TelaBase
-{       
+{
     public TelaCategoria(RepositorioBase repositorio) : base("Categoria", repositorio)
     {
     }
@@ -19,14 +20,10 @@ public class TelaCategoria : TelaBase
                    "Id", "Nome", "Cor"
                );
 
-        EntidadeBase?[] categorias = repositorio.SelecionarTodos();
+        ArrayList categorias = repositorio.SelecionarTodos();
 
-        for (int i = 0; i < categorias.Length; i++)
+        foreach (Categoria c in categorias)
         {
-            Categoria? c = (Categoria?)categorias[i];
-
-            if (c == null)
-                continue;
             string corSelecionada = c.Cor;
 
             if (corSelecionada == "Vermelho")
