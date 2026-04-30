@@ -3,9 +3,11 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using ListaDeCompras.ConsoleApp.Compartilhado;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
+using ListaDeCompras.ConsoleApp.ModuloProdutos;
 class TelaPrincipal
 {
     private RepositorioCategoria repositorioCategoria = new RepositorioCategoria();
+    private RepositorioProduto repositorioProduto= new RepositorioProduto();
 
     public ITelaOpcoes? ApresentarMenuOpcoesPrincipal()
     {
@@ -24,7 +26,8 @@ class TelaPrincipal
 
         if (opcaoMenuPrincipal == "1")
             return new TelaCategoria(repositorioCategoria);
-
+        if (opcaoMenuPrincipal == "2")
+            return new TelaProduto(repositorioProduto, repositorioCategoria);
         return null;
     }
 }

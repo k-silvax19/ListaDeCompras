@@ -32,6 +32,7 @@ public abstract class RepositorioBase<T> where T: EntidadeBase
 
         return true;
     }
+    
     public T? SelecionarPorId(string idSelecionado)
     {
         foreach (T registro in registros)
