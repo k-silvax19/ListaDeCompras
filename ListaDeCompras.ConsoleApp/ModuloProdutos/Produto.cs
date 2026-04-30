@@ -42,6 +42,12 @@ public class Produto : EntidadeBase
 
         if (categoria.Nome == Nome)
             erros += "O Nome da Categoria não pode ser o mesmo do produto.;";
-        return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+        else if (UnidadeMedida != "kg" && UnidadeMedida != "unidade" && UnidadeMedida != "litro" && UnidadeMedida != "caixa")
+        
+            erros += "O Campo \"Unidade de Medida\" deve conter uma seleção permitida (kg, unidade, litro, caixa);";
+
+     return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
+        
     }
 }
