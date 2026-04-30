@@ -1,13 +1,13 @@
 
+using System.Collections;
 using System.Runtime.CompilerServices;
 using ListaDeCompras.ConsoleApp.Compartilhado;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
-
 class TelaPrincipal
 {
     private RepositorioCategoria repositorioCategoria = new RepositorioCategoria();
 
-    public ITela? ApresentarMenuOpcoesPrincipal()
+    public ITelaOpcoes? ApresentarMenuOpcoesPrincipal()
     {
         Console.Clear();
         Console.WriteLine("---------------------------------");
@@ -21,7 +21,7 @@ class TelaPrincipal
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
         string? opcaoMenuPrincipal = Console.ReadLine()?.ToUpper();
-        
+
         if (opcaoMenuPrincipal == "1")
             return new TelaCategoria(repositorioCategoria);
 

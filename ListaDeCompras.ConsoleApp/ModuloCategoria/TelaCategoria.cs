@@ -4,9 +4,9 @@ using ListaDeCompras.ConsoleApp.Compartilhado;
 
 namespace ListaDeCompras.ConsoleApp.ModuloCategoria;
 
-public class TelaCategoria : TelaBase
+public class TelaCategoria : TelaBase<Categoria>, ITelaOpcoes, ITelaCrud
 {
-    public TelaCategoria(RepositorioBase repositorio) : base("Categoria", repositorio)
+    public TelaCategoria(RepositorioCategoria repositorio) : base("Categoria", repositorio)
     {
     }
 
@@ -20,7 +20,7 @@ public class TelaCategoria : TelaBase
                    "Id", "Nome", "Cor"
                );
 
-        ArrayList categorias = repositorio.SelecionarTodos();
+        List<Categoria> categorias = repositorio.SelecionarTodos();
 
         foreach (Categoria c in categorias)
         {
@@ -47,7 +47,7 @@ public class TelaCategoria : TelaBase
         }
     }
 
-    protected override EntidadeBase ObterDadosCadastrais()
+    protected override Categoria ObterDadosCadastrais()
     {
         Console.Write("Digite o nome da categoria: ");
         string nome = Console.ReadLine() ?? string.Empty;
