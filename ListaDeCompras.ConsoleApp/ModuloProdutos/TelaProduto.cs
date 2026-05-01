@@ -30,7 +30,7 @@ public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
         {
             Console.WriteLine(
               "{0, -7} | {1, -20} | {2, -20} | {3, -27} | {4, -10}",
-              p.Id, p.Nome, p.categoria.Nome, p.UnidadeMedida, p.Preco
+              p.Id, p.Nome, p.Categoria.Nome, p.UnidadeMedida, p.Preco
             );
         }
 

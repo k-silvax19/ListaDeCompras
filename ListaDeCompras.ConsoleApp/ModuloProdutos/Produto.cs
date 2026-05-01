@@ -7,7 +7,7 @@ namespace ListaDeCompras.ConsoleApp.ModuloProdutos;
 
 public class Produto : EntidadeBase
 {
-    public Categoria categoria { get; set; }
+    public Categoria Categoria { get; set; }
     public string Nome { get; private set; }
     public int Preco { get; private set; }
     public string UnidadeMedida { get; private set; }
@@ -16,7 +16,7 @@ public class Produto : EntidadeBase
     {
         Nome = nome;
         Preco = preco;
-        this.categoria = categoria;
+        this.Categoria = categoria;
         UnidadeMedida = unidadeMedida;
     }
 
@@ -26,7 +26,7 @@ public class Produto : EntidadeBase
 
         Nome = produtoAtualizado.Nome;
         Preco = produtoAtualizado.Preco;
-        categoria = produtoAtualizado.categoria;
+        Categoria = produtoAtualizado.Categoria;
         UnidadeMedida = produtoAtualizado.UnidadeMedida;
     }
 
@@ -34,20 +34,20 @@ public class Produto : EntidadeBase
     {
         string erros = string.Empty;
 
-        if (Nome.Length == 0 || Nome.Length > 100)
-            erros += "O Campo \"Nome\" deve conter no entre 0 e 100 caracteres.;";
+        if (Nome.Length == 1 || Nome.Length > 100)
+            erros += "O Campo \"Nome\" deve conter no entre 1 e 100 caracteres.;";
 
-        if (string.IsNullOrWhiteSpace(categoria.Id))
+        if (string.IsNullOrWhiteSpace(Categoria.Id))
             erros += "O Campo \"Categoria\" é obrigatório.;";
 
-        if (categoria.Nome == Nome)
+        if (Categoria.Nome == Nome)
             erros += "O Nome da Categoria não pode ser o mesmo do produto.;";
 
         else if (UnidadeMedida != "kg" && UnidadeMedida != "unidade" && UnidadeMedida != "litro" && UnidadeMedida != "caixa")
-        
+
             erros += "O Campo \"Unidade de Medida\" deve conter uma seleção permitida (kg, unidade, litro, caixa);";
 
-     return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
-        
+        return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
     }
 }
