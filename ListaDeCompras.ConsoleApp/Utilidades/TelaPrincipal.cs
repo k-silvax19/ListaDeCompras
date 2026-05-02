@@ -3,11 +3,13 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using ListaDeCompras.ConsoleApp.Compartilhado;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
+using ListaDeCompras.ConsoleApp.ModuloListaDeCompras;
 using ListaDeCompras.ConsoleApp.ModuloProdutos;
 class TelaPrincipal
 {
     private RepositorioCategoria repositorioCategoria = new RepositorioCategoria();
-    private RepositorioProduto repositorioProduto= new RepositorioProduto();
+    private RepositorioProduto repositorioProduto = new RepositorioProduto();
+    private RepositorioLista repositorioLista = new RepositorioLista();
 
     public ITelaOpcoes? ApresentarMenuOpcoesPrincipal()
     {
@@ -28,6 +30,8 @@ class TelaPrincipal
             return new TelaCategoria(repositorioCategoria);
         if (opcaoMenuPrincipal == "2")
             return new TelaProduto(repositorioProduto, repositorioCategoria);
+        if (opcaoMenuPrincipal == "3")
+            return new TelaListadeCompras("Listas de Compras", repositorioLista);
         return null;
     }
 }
