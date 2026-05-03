@@ -179,7 +179,7 @@ public abstract class TelaBase<T> : ITelaOpcoes where T : EntidadeBase
             ExibirMensagem("Erro!");
             return;
         }
-
+        repositorio.Excluir(idSelecionado);
         ExibirMensagem($"O registro \"{idSelecionado}\" foi excluído com sucesso.");
     }
 

@@ -54,6 +54,14 @@ public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
         string idSelecionado = Console.ReadLine() ?? string.Empty;
         Categoria? categoria = repositorioCategoria.SelecionarPorId(idSelecionado);
 
+        if (categoria == null)
+        {
+            ExibirMensagem("Categoria não encontrada");
+            Console.ReadLine();
+
+            return ObterDadosCadastrais();
+        }
+
         Console.WriteLine("Digite uma unidade de medida válida:");
         Console.WriteLine("================================");
         Console.WriteLine("1 - kg");
@@ -84,7 +92,7 @@ public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
     public override List<string> ValidarRegistroDuplicado(Produto novaEntidade, string? IdIgnorado)
     {
         List<string> erros = new List<string>();
-     
+
         List<Produto> produtos = repositorio.SelecionarTodos();
 
         foreach (Produto p in produtos)

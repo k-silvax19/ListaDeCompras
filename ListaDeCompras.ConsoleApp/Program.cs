@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using ListaDeCompras.ConsoleApp.Compartilhado;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
 
@@ -9,10 +10,13 @@ while (true)
 {
     ITelaOpcoes? telaSelecionada = telaPrincipal.ApresentarMenuOpcoesPrincipal();
 
-    if (telaSelecionada == null)
+    if (telaSelecionada == null) 
     {
         Console.Clear();
-        break;
+        
+        if (telaPrincipal.SairDoPrograma == true)
+            break;
+        continue;
     }
 
     while (true)

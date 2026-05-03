@@ -12,7 +12,7 @@ public class ListaDeCompras : EntidadeBase
     public StatusListaDeCompras Status { get; private set; }
 
     public List<Item> Itens { get; private set; } = new List<Item>();
-    
+
     public ListaDeCompras(string nome)
     {
         Nome = nome;
@@ -20,6 +20,26 @@ public class ListaDeCompras : EntidadeBase
         Status = StatusListaDeCompras.Aberta;
     }
 
+    public int ObterTotalItens()
+    {
+        int total = 0;
+
+        foreach (Item item in Itens)
+            total += item.Quantidade;
+
+        return total;
+    }
+
+    public decimal ObterValorTotal()
+    {
+        decimal total = 0;
+
+        foreach (Item item in Itens)
+            total += item.ObterTotal();
+
+        return total;
+    }
+    
     public override void AtualizarRegistro(EntidadeBase entidadeAtualizada)
     {
         ListaDeCompras listaDeComprasAtualizada = (ListaDeCompras)entidadeAtualizada;

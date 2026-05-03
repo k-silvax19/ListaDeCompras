@@ -15,8 +15,8 @@ public class TelaListadeCompras : TelaBase<ListaDeCompras>, ITelaOpcoes, ITelaCr
             ExibirCabecalho("Visualização de Listas");
 
         Console.WriteLine(
-                   "{0, -7} | {1, -20} | {2, -10} | {3, -10}",
-                   "Id", "Nome", "Data da Criação", "Status"
+                   "{0, -7} | {1, -20} | {2, -10} | {3, -10} | {4, -10} | {5, -10}",
+                   "Id", "Nome", "Data da Criação", "Status", "Itens", "Total"
                );
 
         List<ListaDeCompras> lista = repositorio.SelecionarTodos();
@@ -29,8 +29,8 @@ public class TelaListadeCompras : TelaBase<ListaDeCompras>, ITelaOpcoes, ITelaCr
                 Console.ForegroundColor = ConsoleColor.Green;
 
             Console.WriteLine(
-              "{0, -7} | {1, -20} | {2, -10} | {3, -10}",
-              l.Id, l.Nome, l.DataCriacao.ToShortDateString(), l.Status
+               "{0, -7} | {1, -20} | {2, -10} | {3, -10} | {4, -10} | {5, -10}",
+              l.Id, l.Nome, l.DataCriacao.ToShortDateString(), l.Status, l.ObterTotalItens(), l.ObterValorTotal()
           );
         }
 
@@ -50,4 +50,15 @@ public class TelaListadeCompras : TelaBase<ListaDeCompras>, ITelaOpcoes, ITelaCr
 
         return new ListaDeCompras(nome);
     }
+
+    public override List<string> ValidarExclusaoRegistro(ListaDeCompras lista)
+    {
+        List<string> erros = new List<string>();
+
+        if (lista.Itens.Count > 0)
+            erros.Add("Não é possível excluir uma lista que possui itens vinculados.");
+
+        return erros;
+    }
 }
+
