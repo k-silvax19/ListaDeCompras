@@ -1,5 +1,6 @@
 namespace ListaDeCompras.ConsoleApp.Compartilhado;
 using System.Collections;
+using System.Collections.Concurrent;
 
 public abstract class RepositorioBase<T> where T: EntidadeBase
 {

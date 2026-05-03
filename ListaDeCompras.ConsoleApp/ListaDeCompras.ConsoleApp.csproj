@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ModuloItens\" />
     <Folder Include="ModuloListaDeCompras\" />
     <Folder Include="ModuloCategoria\" />
   </ItemGroup>

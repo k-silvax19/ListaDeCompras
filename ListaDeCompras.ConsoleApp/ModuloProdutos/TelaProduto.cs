@@ -80,4 +80,22 @@ public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
 
         return new Produto(nome, preco, categoria, unidadeMedida);
     }
+
+    public override List<string> ValidarRegistroDuplicado(Produto novaEntidade, string? IdIgnorado)
+    {
+        List<string> erros = new List<string>();
+     
+        List<Produto> produtos = repositorio.SelecionarTodos();
+
+        foreach (Produto p in produtos)
+        {
+            if (p.Id != IdIgnorado && p.Nome == p.Categoria.Nome)
+            {
+                erros.Add("o produto não pode ter o mesmo nome que a categoria!");
+                break;
+            }
+        }
+
+        return erros;
+    }
 }

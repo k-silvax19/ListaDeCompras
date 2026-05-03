@@ -16,22 +16,22 @@ public class Categoria : EntidadeBase
 
     public override void AtualizarRegistro(EntidadeBase entidadeAtualizada)
     {
-       Categoria categoriaAtualizada = (Categoria)entidadeAtualizada;
+        Categoria categoriaAtualizada = (Categoria)entidadeAtualizada;
 
-       Nome = categoriaAtualizada.Nome;
-       Cor = categoriaAtualizada.Cor;
+        Nome = categoriaAtualizada.Nome;
+        Cor = categoriaAtualizada.Cor;
     }
 
     public override string[] Validar()
     {
         string erros = string.Empty;
 
-        if(Nome.Length == 0 || Nome.Length > 50)
+        if (Nome.Length == 0 || Nome.Length > 50)
             erros += "O Campo \"Nome\" deve conter no entre 0 e 50 caracteres.;";
 
-        if(string.IsNullOrWhiteSpace(Cor))
+        if (string.IsNullOrWhiteSpace(Cor))
             erros += "O Campo \"Cor\" deve conter no entre 0 e 50 caracteres.;";
-            
+
         else if (Cor != "Vermelho" && Cor != "Azul" && Cor != "Verde" && Cor != "Branco")
             erros += "O Campo \"Cor\" deve conter uma selecao permitida (Vermelho, Azul, Verde, Branco);";
 

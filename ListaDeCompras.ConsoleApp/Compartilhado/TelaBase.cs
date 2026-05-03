@@ -31,6 +31,7 @@ public abstract class TelaBase<T> : ITelaOpcoes where T : EntidadeBase
         return opcaoMenu;
     }
 
+
     public void Cadastrar()
     {
         ExibirCabecalho($"Cadastro de {nomeEntidade}");
@@ -56,6 +57,16 @@ public abstract class TelaBase<T> : ITelaOpcoes where T : EntidadeBase
             Console.WriteLine("---------------------------------");
             Console.Write("Digite ENTER para continuar...");
             Console.ReadLine();
+
+            Cadastrar();
+            return;
+        }
+
+        List<string> errosValidacao = ValidarRegistroDuplicado(novaEntidade);
+
+        if (errosValidacao.Count > 0)
+        {
+            ExibirMensagem("Erro");
 
             Cadastrar();
             return;
@@ -113,6 +124,16 @@ public abstract class TelaBase<T> : ITelaOpcoes where T : EntidadeBase
             return;
         }
 
+        List<string> errosValidacao = ValidarRegistroDuplicado(novaEntidade, idSelecionado);
+
+        if (errosValidacao.Count > 0)
+        {
+            ExibirMensagem("Erro");
+
+            Cadastrar();
+            return;
+        }
+
         bool conseguiuEditar = repositorio.Editar(idSelecionado, novaEntidade);
 
         if (!conseguiuEditar)
@@ -143,11 +164,19 @@ public abstract class TelaBase<T> : ITelaOpcoes where T : EntidadeBase
                 break;
         } while (true);
 
-        bool conseguiuExcluir = repositorio.Excluir(idSelecionado);
+        T? registroSelecionado = repositorio.SelecionarPorId(idSelecionado);
 
-        if (!conseguiuExcluir)
+        if (registroSelecionado == null)
         {
             ExibirMensagem("Não foi possível encontrar o registro requisitado.");
+            return;
+        }
+
+        List<string> errosDuplicados = ValidarExclusaoRegistro(registroSelecionado);
+
+        if (errosDuplicados.Count > 0)
+        {
+            ExibirMensagem("Erro!");
             return;
         }
 
@@ -173,6 +202,16 @@ public abstract class TelaBase<T> : ITelaOpcoes where T : EntidadeBase
         Console.WriteLine("---------------------------------");
         Console.Write("Digite ENTER para continuar...");
         Console.ReadLine();
+    }
+
+    public virtual List<string> ValidarRegistroDuplicado(T novaEntidade, String? IdIgnorado = null)
+    {
+        return new List<string>();
+    }
+
+    public virtual List<string> ValidarExclusaoRegistro(T novaEntidade)
+    {
+        return new List<string>();
     }
 
     protected abstract T ObterDadosCadastrais();

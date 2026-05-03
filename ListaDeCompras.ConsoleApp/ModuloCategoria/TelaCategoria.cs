@@ -1,12 +1,12 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using ListaDeCompras.ConsoleApp.Compartilhado;
 
 namespace ListaDeCompras.ConsoleApp.ModuloCategoria;
 
 public class TelaCategoria : TelaBase<Categoria>, ITelaOpcoes, ITelaCrud
 {
-    public TelaCategoria(RepositorioCategoria repositorio) : base("Categoria", repositorio)
+    public TelaCategoria(RepositorioBase<Categoria> repositorio) : base("Categoria", repositorio)
     {
     }
 
@@ -74,5 +74,23 @@ public class TelaCategoria : TelaBase<Categoria>, ITelaOpcoes, ITelaCrud
             corPorExtenso = "Branco";
 
         return new Categoria(nome, corPorExtenso);
+    }
+
+    public override List<string> ValidarRegistroDuplicado(Categoria novaEntidade, string? IdIgnorado)
+    {
+        List<string> erros = new List<string>();
+
+        List<Categoria> categorias = repositorio.SelecionarTodos();
+
+        foreach (Categoria c in categorias)
+        {
+            if (c.Id != IdIgnorado && c.Nome == novaEntidade.Nome)
+            {
+                erros.Add("Já existe uma categoria com esse nome");
+                break;
+            }
+        }
+
+        return erros;
     }
 }

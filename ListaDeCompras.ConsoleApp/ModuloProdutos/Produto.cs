@@ -40,9 +40,6 @@ public class Produto : EntidadeBase
         if (string.IsNullOrWhiteSpace(Categoria.Id))
             erros += "O Campo \"Categoria\" é obrigatório.;";
 
-        if (Categoria.Nome == Nome)
-            erros += "O Nome da Categoria não pode ser o mesmo do produto.;";
-
         else if (UnidadeMedida != "kg" && UnidadeMedida != "unidade" && UnidadeMedida != "litro" && UnidadeMedida != "caixa")
 
             erros += "O Campo \"Unidade de Medida\" deve conter uma seleção permitida (kg, unidade, litro, caixa);";

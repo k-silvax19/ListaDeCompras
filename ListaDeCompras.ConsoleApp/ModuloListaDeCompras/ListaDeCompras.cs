@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.Contracts;
 using ListaDeCompras.ConsoleApp.Compartilhado;
+using ListaDeCompras.ConsoleApp.ModuloItens;
 
 namespace ListaDeCompras.ConsoleApp.ModuloListaDeCompras;
 
@@ -10,6 +11,8 @@ public class ListaDeCompras : EntidadeBase
     public DateTime DataCriacao { get; private set; }
     public StatusListaDeCompras Status { get; private set; }
 
+    public List<Item> Itens { get; private set; } = new List<Item>();
+    
     public ListaDeCompras(string nome)
     {
         Nome = nome;
